@@ -93,12 +93,51 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.sEstablecerPIN) {
+
+            setContentView(R.layout.establecer_pin);
+            Button b = (Button) findViewById(R.id.btnSalir);
+                    b.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            setContentView(R.layout.activity_main);
+                        }
+                    });
+            Button b2 = (Button) findViewById(R.id.btnGuardar);
+                    b2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            setContentView(R.layout.activity_main);
+                        }
+                    });
+
+            return true;
+        }
+        if(id == R.id.sCambiarPIN){
+            setContentView(R.layout.confirmar_pin);
+
+            Button b2 = (Button) findViewById(R.id.salirPR);
+                b2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TextView a = (TextView) findViewById(R.id.pinconfirmar);
+                        if(a.getText().toString().equals("1234")){
+                        setContentView(R.layout.establecer_pin);}
+                    }
+                });
+            View click = (View) findViewById(R.id.olvidastepass);
+            click.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setContentView(R.layout.restablecer_por_pregunta);
+                }
+            });
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
