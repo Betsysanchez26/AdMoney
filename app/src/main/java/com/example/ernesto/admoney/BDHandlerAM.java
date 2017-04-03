@@ -119,5 +119,65 @@ public void insertarLOGINN(String pin, String pre, String resp){
 
     db.insert("LOGINN", null, valores);
     }
+// Metodos para insertar en las tablas
+
+public void insertarEgresos(String catNombre,float cantidad, String descripcion){
+	String sql = "SELECT IDCATEGORIAS FROM CATEGORIAS WHERE NOMBRE"+
+		     " LIKE "+catNombre;
+	int idcategoria = c.getInt(0)
+	Cursor c = db.rawQuery(sql,null);
+	c.moveToFirst();
+
+	ContentValueas valores = new ContentValues();
+	valores.put("IDCATEGORIAS", c.idcategoria);
+	valores.put("CANTIDAD", c.cantidad);
+	valores.put("DESCRIPCION", c.descripcion);
+
+	db.insert("EGRESOS",null, valores);
+}
+
+public void insertarRecurrentes(Recurrentes r){
+	String sql = "SET DATEFORMAT ymd";
+	db.execSql(sql);
+
+	ContentValues valores = new ContentValues();
+	valores.put("NOMBRE",r.getNombre());
+	valores.put("CANTIDAD",r.getCantidad());
+	valores.put("FECHA",r.getFecha());
+
+	db.insert("RECURRENTES",null,recurrentes);
+}
+
+public void insertarIngresos(Ingresos i,String catNombre){
+	String sql = "SELECT IDCATEGORIAS FROM CATEGORIAS WHERE NOMBRE"+
+		     " LIKE "+catNombre;
+	int idcategoria = c.getInt(0)
+	Cursor c = db.rawQuery(sql,null);
+	c.moveToFirst();
+
+	ContentValueas valores = new ContentValues();
+	valores.put("IDCATEGORIAS", idcategoria);
+	valores.put("CANTIDAD", cantidad);
+	valores.put("DESCRIPCION", descripcion);
+
+	db.insert("EGRESOS",null, valores);
+}
+
+// Metodos para mostrar datos
+
+public Login obtenerRecurrentes(){
+    Recurrentes r = new Recurrentes();
+    String sql = "SELECT * FROM RECURRENTES";
+    Cursor c = db.rawQuery(sql,null);
+    if(c.moveToFirst()){
+        r.setNombre(c.getString(1));
+        r.setCantidad(c.getString(2));
+        r.setFecha(c.getString(3));
+    }else{
+        return null;
+    }
+    return r;
+}	
+	
 }
 
